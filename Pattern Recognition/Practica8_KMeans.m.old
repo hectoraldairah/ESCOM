@@ -1,0 +1,31 @@
+% IPN - ESCOM
+% Pattern Recognition
+% ww w ww - wwwwww.com/pattern-recognition
+
+clc
+
+figure
+hold on
+grid on
+
+www_colores = ['m'; 'r'; 'g'; 'b']; % Especificadores para colores de ploteo: http://www.mathworks.com/help/matlab/ref/plot.html
+www_figuras = ['o'; '+'; '*'; '.'; 'x'; 's'; 'd'; '^'; 'v'; '<'; '>'; 'p'; 'h']; % Especificadores para marcadores de ploteo
+
+%limite = input('Límite de la gráfica: ');
+puntos = input('Cantidad de puntos: ');
+datos = randi([-50, 50], puntos, 2);
+%plot(datos(:, 1), datos(:, 2), 'k>')
+
+k = input('Cantidad de clusters (grupos = K): ');
+[centroide, puntos_por_grupo, asignacion] = PR_KMeans(datos, k); % La asignación indica en órden a qué grupo (centroide) pertenece cada fila
+
+for i=1:size(centroide, 1)
+    figura_aleatoria = strcat(www_colores(randi([1, size(www_colores, 1)], 1, 1)), www_figuras(randi([1, size(www_figuras, 1)], 1, 1)));
+    plot(centroide(i, 1), centroide(i, 2), figura_aleatoria, 'LineWidth', 2)
+    
+    for a=1:size(asignacion, 1)
+        if asignacion(a) == i
+            plot(datos(a, 1), datos(a, 2), figura_aleatoria, 'LineWidth', 1)
+        end
+    end
+end

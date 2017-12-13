@@ -1,0 +1,6 @@
+[submodule "Hola"]
+	path = Carpeta
+	url = git@github.com:xx/remoto.git
+[submodule "Hola 2"]
+	path = Carpeta2
+	url = git@github.com:xx/remoto2.git
